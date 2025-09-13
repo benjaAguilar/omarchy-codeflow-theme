@@ -3,11 +3,19 @@
 action=$1
 
 if [ "$action" = "next" ]; then
-    playerctl --player=spotify next
-    notify-send "Played next song."
+  playerctl --player=spotify next
+  notify-send "Played next song."
 elif [ "$action" = "previous" ]; then
-    playerctl --player=spotify previous
-    notify-send "Played previous song."
-else
-    echo "Acción no válida. Usa 'next' o 'previous'."
+  playerctl --player=spotify previous
+  notify-send "Played previous song."
+fi
+
+status=$(playerctl --player=spotify status)
+
+if [ "$status" != "" ]; then
+  if [ "$action" = "rendernext" ]; then
+    echo "&gt;&gt;"
+  elif [ "$action" = "renderprevious" ]; then
+    echo "&lt;&lt;"
+  fi
 fi
