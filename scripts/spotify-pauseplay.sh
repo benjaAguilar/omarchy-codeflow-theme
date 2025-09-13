@@ -3,9 +3,9 @@
 isPlaying=$(playerctl --player=spotify status)
 
 if [ "$isPlaying" = "Playing" ]; then
-  echo "||"
+  echo " || "
 elif [ "$isPlaying" = "Paused" ]; then
-  echo "|>"
+  echo " |> "
 else
   echo ""
 fi

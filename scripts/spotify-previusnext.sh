@@ -14,8 +14,8 @@ status=$(playerctl --player=spotify status)
 
 if [ "$status" != "" ]; then
   if [ "$action" = "rendernext" ]; then
-    echo "&gt;&gt;"
+    echo "||&gt;"
   elif [ "$action" = "renderprevious" ]; then
-    echo "&lt;&lt;"
+    echo "&lt;||"
   fi
 fi
