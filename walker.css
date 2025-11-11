@@ -1,71 +1,220 @@
-@define-color selected-text #fabd2f;
-@define-color text #e6d9db;
-@define-color base #2c2525;
-@define-color border #e6d9db;
-@define-color foreground #e6d9db;
-@define-color background #2c2525;
+/* walker.css — Adaptado al tema "omarchy-codeflow"
+   Generado a partir del zip que enviaste. 
+   Objetivo: mantener la sintaxis de walker (variables @define-color, selectores #window, child:selected, etc.)
+   Notas: usé variables para colores principales, sombras suaves, transiciones y tamaños accesibles.
+*/
 
+@define-color fg #e6d9db;
+/* texto principal */
+@define-color text @fg;
+@define-color bg #2c2525;
+/* fondo principal */
+@define-color surface #342a2a;
+/* superficie de cajas */
+@define-color accent #fabd2f;
+/* color de acento / seleccionado */
+@define-color accent-2 #ffb86b;
+/* acento secundario */
+@define-color subtle #9aa1a6;
+/* texto secundario / placeholders */
+@define-color border #3b3232;
+/* bordes sutiles */
+@define-color glass rgba(255, 255, 255, 0.035);
+/* efecto vidrio sutil */
+@define-color focus-ring rgba(250, 189, 47, 0.16);
+
+/* Tamaños y medidas (fáciles de ajustar) */
+@define-color radius 10px;
+@define-color small-radius 8px;
+@define-color gap 12px;
+@define-color padding 14px;
+
+/* Tipografía (elige una fuente del sistema o la que uses en tu tema) */
+#window,
+#box,
+child,
+label,
+#input {
+  font-family: 'Inter', 'Roboto', system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: @fg;
+}
+
+/* Ventana principal */
 #window {
-  color: @foreground;
+  background: @bg;
+  color: @fg;
 }
 
 #box {
-  border-radius: 10px;
-  border: none;
-  background: @background;
+  border-radius: @radius;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent), @surface;
+  padding: @padding;
+  border: 1px solid @border;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.55), 0 2px 6px rgba(0, 0, 0, 0.35);
+  min-width: 480px;
+  /* sensible por defecto, ajustable */
+  max-width: 980px;
 }
 
-#search {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.22);
-  background: transparent;
-  padding: 8px;
-  border-bottom: 1px solid @foreground;
-}
-
-#prompt {
-  margin-left: 4px;
-  margin-right: 12px;
-  color: @foreground;
-  opacity: 0.2;
-}
-
-#clear {
-  color: @foreground;
-  opacity: 0.8;
-}
-
-#password,
-#input,
-#typeahead {
-  border-radius: 2px;
+/* Header / campo de búsqueda */
+#head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
 #input {
-  background: none;
-}
-
-#spinner {
-  padding: 8px;
-}
-
-#typeahead {
-  color: @foreground;
-  opacity: 0.8;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
+  border-radius: @small-radius;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  outline: none;
+  width: 100%;
+  color: @fg;
+  font-size: 15px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 }
 
 #input placeholder {
-  opacity: 0.5;
+  color: @subtle;
+  opacity: 0.9;
+}
+
+#input:focus {
+  box-shadow: 0 4px 18px @focus-ring;
+  border-color: @accent;
+}
+
+/* Lista de resultados */
+#list {
+  margin-top: 6px;
+  border-radius: calc(@radius - 2px);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 child {
-  padding: 8px;
-  border-bottom: 1px solid transparent;
-  transition: all 200ms ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  transition: background 180ms cubic-bezier(.2, .9, .2, 1), transform 140ms ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+child:last-child {
+  border-bottom: none;
+}
+
+child .icon {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.02));
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.32) inset;
+}
+
+child .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+child .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: @fg;
+}
+
+child .subtitle {
+  font-size: 13px;
+  color: @subtle;
+  opacity: 0.95;
+}
+
+/* Hover y seleccionado */
+child:hover {
+  background: rgba(250, 189, 47, 0.06);
+  /* ligero resplandor del acento */
+  transform: translateY(-1px);
 }
 
 child:selected,
-child:hover {
-  background: alpha(@color1, 0.4);
-  border-bottom: 1px solid #fabd2f;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.22);
+child:selected:hover {
+  background: linear-gradient(90deg, rgba(250, 189, 47, 0.12), rgba(255, 184, 107, 0.04));
+  border-left: 3px solid @accent;
+  padding-left: calc(12px - 3px);
 }
+
+/* Texto seleccionado dentro de un resultado */
+child:selected .title,
+child:selected .subtitle {
+  color: @fg;
+}
+
+/* Detalles de accesibilidad: foco por teclado */
+child:focus {
+  outline: none;
+  box-shadow: 0 6px 18px @focus-ring;
+}
+
+/* Mensaje de estado / hint */
+#status {
+  color: @subtle;
+  font-size: 13px;
+  padding: 8px 12px;
+  opacity: 0.9;
+}
+
+/* Divisor y acciones */
+.separator {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.02);
+  margin: 6px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action {
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.action:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Mobile / small widths (si aplica) */
+@media (max-width: 520px) {
+  #box {
+    min-width: 320px;
+    padding: 10px;
+  }
+
+  child .icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  child {
+    padding: 8px 10px;
+  }
+}
+
+/* Dark/light friendliness: si el launcher soporta cambio, mantenemos contraste */
+/* Si necesitas una variante más clara, puedo generar walker.light.css */
+
+/* Fin de walker.css */
