@@ -1,2 +1,15 @@
 @define-color foreground #e6d9db;
 @define-color background #282C34;
+
+* {
+  font-family: 'Sans Bold';
+}
+
+window#waybar {
+  padding: 15px;
+}
+
+#clock {
+  font-weight: bold;
+  font-size: 12px;
+}

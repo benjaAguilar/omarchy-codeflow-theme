@@ -1,4 +1,4 @@
-@define-color window_bg_color #282c34;
+@define-color window_bg #282c34;
 /* One Dark background */
 @define-color accent_bg_color #61afef;
 /* Blue accent (focus / selection) */
@@ -17,8 +17,8 @@
 }
 
 popover {
-  background: lighter(@window_bg_color);
-  border: 1px solid darker(@window_bg_color);
+  background: lighter(@window_bg);
+  border: 1px solid darker(@window_bg);
   border-radius: 18px;
   padding: 10px;
 }
@@ -27,10 +27,10 @@ popover {
   box-shadow:
     0 19px 38px rgba(0, 0, 0, 0.35),
     0 15px 12px rgba(0, 0, 0, 0.25);
-  background: @window_bg_color;
+  background: @window_bg;
   padding: 20px;
   border-radius: 20px;
-  border: 1px solid darker(@window_bg_color);
+  border: 1px solid darker(@window_bg);
 }
 
 .preview-box,
@@ -41,7 +41,7 @@ popover {
 
 .input {
   caret-color: @accent_bg_color;
-  background: lighter(@window_bg_color);
+  background: lighter(@window_bg);
   padding: 10px;
   color: @theme_fg_color;
   border-radius: 10px;
@@ -85,7 +85,7 @@ child:selected .item-box {
 
 .keybinds {
   padding-top: 10px;
-  border-top: 1px solid lighter(@window_bg_color);
+  border-top: 1px solid lighter(@window_bg);
   font-size: 12px;
   color: @theme_fg_color;
 }
